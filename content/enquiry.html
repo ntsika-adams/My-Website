@@ -23,28 +23,32 @@
  
 Required Information:
 <br>
-<label for="name" name"name">Your Name</label>
+<label for="name" name"name">Your Name:</label>
 <input type="text" id="name" placeholder="Your Name:" required>
 <br>
  <label for="Email" name="Email"> Email Address:</label>
-        <input type="text" name="Email" placeholder="Your Email: "required
-        <br>
-<label for="Number" name="Number"> Phone Number</label>
-<input type="text" name="Number" placeholder="Your phone number: " required
+        <input type="text" name="Email" placeholder="Your Email "required
+        <br><br>
+<label for="Number" name="Number"> Phone Number:</label>
+<input type="tel" id="Number" pattern="[0-9]{10}"placeholder="Your phone number " required
 <br>
 
 <h4>Enquiry Type:</h4>
+<label for="enquiry-type">Enquiry Type</label>
+<select id="enquiry-type" name="enquiry-type" required
+<option value="">---Select an option---</option>
+<option value="Product enquiry">Product enquiry</option><br>
+<option value="Size enquiry">Size enquiry</option><br>
+<option value="Stock availability">Stock availability</option><br>
+<option value="Delivery enquiry">Delivery enquiry</option><br>
+<option value="Click-and-collect enquiry">Click-and-collect enquiry</option><br>
+<option value="General enquiry">General enquiry</option><br>
 
-- Product enquiry<br>
-- Size enquiry<br>
-- Stock availability<br>
-- Delivery enquiry<br>
-- Click-and-collect enquiry<br>
-- General enquiry<br>
-
-Product Name:
+<label for="name" name"name">Product Name:</label>
+<input type="text" id="name" placeholder="Product Name:" required>
 <br>
-Message:
+<label for="name" name"name">Product Name:</label>
+<input type="text" id="name" placeholder="Product Name:" required>Product Name:Message:
 <br>
 
 <p>We aim to respond to customer enquiries as soon as possible.</p>
