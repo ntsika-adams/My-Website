@@ -31,7 +31,8 @@ Provide click-and-collect as an alternative to delivery.
 The proposed website should contain the following main pages:
 
 /
-|── index.html
+│
+├── index.html
 │
 ├── content/
 │   ├── homepage/
@@ -49,8 +50,8 @@ The proposed website should contain the following main pages:
 ├── css/
 │   └── style.css
 │
-── js/
-   └── script.js
+└── js/
+    └── script.js
 
  ## Main Website Features
 
