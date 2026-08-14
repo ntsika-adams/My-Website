@@ -49,9 +49,9 @@ The proposed website should contain the following main pages:
 ### │
 ### ├── css/ 
 ### │   └── style.css 
-│
-└── js/ 
-    └── script.js 
+### │
+### └── js/ 
+ ###    └── script.js 
 
  ## Main Website Features
 
