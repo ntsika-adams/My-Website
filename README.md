@@ -26,32 +26,36 @@ Support registered customer accounts and targeted promotions.
 
 Provide click-and-collect as an alternative to delivery.
 
-## Website Pages
+## Sitemap and Folder Structure
 
-The proposed website should contain the following main pages:
+The Treadwears website is organized into separate HTML pages, CSS and JavaScript files, documentation, and image folders for different product categories.
 
-### /
+### Treadwears-Website/
 ### │
-### ├── index.html 
+### ├── index.html
+### ├── about.html
+### ├── contact.html
+### ├── enquiry.html
+### ├── products.html
 ### │
-### ├── content/ 
-### │   ├── homepage/ 
-### │   ├── about/ 
-### │   ├── products/ 
-### │   ├── services/ 
-### │   ├── enquiry/ 
-### │   └── contact/ 
+### ├── css/
+### │   └── style.css
 ### │
-### ├── images/ 
-### │   ├── products/ 
-### │   ├── banners/ 
-### │   └── logo/ 
+### ├── document/
 ### │
-### ├── css/ 
-### │   └── style.css 
+### ├── images/
+### │   ├── Accessories/
+### │   ├── Kids clothes/
+### │   ├── Logos/
+### │   ├── Mens clothes/
+### │   ├── School Uniform/
+### │   ├── Shoes/
+### │   └── Women's clothes/
 ### │
-### └── js/ 
- ###    └── script.js 
+### ├── js/
+### │   └── script.js
+### │
+### └── README.md
 
  ## Main Website Features
 
