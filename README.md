@@ -30,27 +30,27 @@ Provide click-and-collect as an alternative to delivery.
 
 The proposed website should contain the following main pages:
 
-*/
-*├── index.html
-*│
-*├── content/
-*│   ├── homepage/
-*│   ├── about/
-*│   ├── products/
-*│   ├── services/
-*│   ├── enquiry/
-*│   └── contact/
-*│
-*├── images/
-*│   ├── products/
-*│   ├── banners/
-*│   └── logo/
-*│
-*├── css/
-*│   └── style.css
-*│
-*└── js/
-*    └── script.js
+/
+|── index.html
+│
+├── content/
+│   ├── homepage/
+│   ├── about/
+│   ├── products/
+│   ├── services/
+│   ├── enquiry/
+│   └── contact/
+│
+├── images/
+│   ├── products/
+│   ├── banners/
+│   └── logo/
+│
+├── css/
+│   └── style.css
+│
+── js/
+   └── script.js
 
  ## Main Website Features
 
