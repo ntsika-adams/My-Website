@@ -32,26 +32,26 @@ The proposed website should contain the following main pages:
 
 ### /
 ### │
-### ├── index.html **
+### ├── index.html 
 ### │
-### ├── content/ **
-### │   ├── homepage/ **
-### │   ├── about/ **
-### │   ├── products/ **
-### │   ├── services/ **
-### │   ├── enquiry/ **
-### │   └── contact/ **
+### ├── content/ 
+### │   ├── homepage/ 
+### │   ├── about/ 
+### │   ├── products/ 
+### │   ├── services/ 
+### │   ├── enquiry/ 
+### │   └── contact/ 
 ### │
-### ├── images/ **
-### │   ├── products/ **
-### │   ├── banners/ **
-### │   └── logo/ **
+### ├── images/ 
+### │   ├── products/ 
+### │   ├── banners/ 
+### │   └── logo/ 
 ### │
-### ├── css/ **
-### │   └── style.css **
+### ├── css/ 
+### │   └── style.css 
 │
-└── js/ **
-    └── script.js **
+└── js/ 
+    └── script.js 
 
  ## Main Website Features
 
