@@ -32,4 +32,68 @@ a {
 ul {
   list-style: none;
 }
+ /* ---------- 2.3 Typography Styles / Scale ---------- */
+h1, h2, h3 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+ 
+h1 { font-size: 2.5rem; }   /* typography scale */
+h2 { font-size: 1.75rem; }
+h3 { font-size: 1.25rem; }
+ 
+p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+ 
+/* =========================================================
+   2.4 Layout Structure (Grid + Flexbox)
+   ========================================================= */
+ 
+/* Header uses Flexbox */
+.site-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+ 
+.main-nav ul {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+}
+ 
+/* Overall page uses Grid template areas */
+.page-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "hero"
+    "content"
+    "gallery"
+    "contact";
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+ 
+.hero        { grid-area: hero; }
+.content-grid{ grid-area: content; }
+.responsive-image-demo { grid-area: gallery; }
+.contact-section { grid-area: contact; }
+ 
+/* Content cards use Grid on desktop (3 columns) */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
  
