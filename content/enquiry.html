@@ -1,61 +1,73 @@
+
+Enquiry · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Product Enquiry</title>
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <h1 style="text-align: center;">PRODUCT ENQUIRY</h1>
-
-    <!--Navigation-->
-   <nav>
-    <a href="../index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="products.html">Products</a>
-    <a href="enquiry.html">Enquiry</a>
-    <a href="contact.html">Contact</a>
-</nav>
-
-<h2>Have a question about one of our products?</h2>
-
-<p>Complete the enquiry form and the TrendWear team will assist you.</p>
  
-Required Information:
-<br>
-<label for="name" name"name">Your Name:</label>
-<input type="text" id="name" placeholder="Your Name:" required>
-<br>
- <label for="Email" name="Email"> Email Address:</label>
-        <input type="text" name="Email" placeholder="Your Email "required
+    <!--Navigation-->
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a href="enquiry.html">Enquiry</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+ 
+    <h2>Have a question about one of our products?</h2>
+ 
+    <p>Complete the enquiry form and the TrendWear team will assist you.</p>
+ 
+    <form>
+        <p>Required Information:</p>
+ 
+        <label for="name">Your Name:</label><br>
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
         <br><br>
-<label for="Number" name="Number"> Phone Number:</label>
-<input type="tel" id="Number" pattern="[0-9]{10}"placeholder="Your phone number " required
-<br>
-
-<h4>Enquiry Type:</h4>
-<label for="enquiry-type">Enquiry Type</label>
-<select id="enquiry-type" name="enquiry-type" required
-<option value="">---Select an option---</option>
-<option value="Product enquiry">Product enquiry</option><br>
-<option value="Size enquiry">Size enquiry</option><br>
-<option value="Stock availability">Stock availability</option><br>
-<option value="Delivery enquiry">Delivery enquiry</option><br>
-<option value="Click-and-collect enquiry">Click-and-collect enquiry</option><br>
-<option value="General enquiry">General enquiry</option><br>
-
-<label for="name" name"name">Product Name:</label>
-<input type="text" id="name" placeholder="Product Name:" required>
-<br>
-<label for="name" name"name">Message:</label>
-<input type="text" id="name" placeholder="Message" required>
-<br>
-
-<p>We aim to respond to customer enquiries as soon as possible.</p>
-Submit Enquiry<input type="button"
-
-<footer style="text-align: center; padding: 10px 0;">
+ 
+        <label for="email">Email Address:</label><br>
+        <input type="email" id="email" name="email" placeholder="Your Email" required>
+        <br><br>
+ 
+        <label for="number">Phone Number:</label><br>
+        <input type="tel" id="number" name="number" pattern="[0-9]{10}" placeholder="Your phone number" required>
+        <br><br>
+ 
+        <h4>Enquiry Type:</h4>
+        <label for="enquiry-type">Enquiry Type</label><br>
+        <select id="enquiry-type" name="enquiry-type" required>
+            <option value="">---Select an option---</option>
+            <option value="Product enquiry">Product enquiry</option>
+            <option value="Size enquiry">Size enquiry</option>
+            <option value="Stock availability">Stock availability</option>
+            <option value="Delivery enquiry">Delivery enquiry</option>
+            <option value="Click-and-collect enquiry">Click-and-collect enquiry</option>
+            <option value="General enquiry">General enquiry</option>
+        </select>
+        <br><br>
+ 
+        <label for="product-name">Product Name:</label><br>
+        <input type="text" id="product-name" name="product-name" placeholder="Product Name" required>
+        <br><br>
+ 
+        <label for="message">Message:</label><br>
+        <input type="text" id="message" name="message" placeholder="Message" required>
+        <br><br>
+ 
+        <p>We aim to respond to customer enquiries as soon as possible.</p>
+ 
+        <input type="submit" value="Submit Enquiry">
+    </form>
+ 
+    <footer style="text-align: center; padding: 10px 0;">
         <p>&copy; 2026 TRENDWEAR. All Rights Reserved.</p>
     </footer>
 </body>
 </html>
+ 
