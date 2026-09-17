@@ -16,7 +16,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   color: #f0f0f0;
-  background-color: #3b2412; /* dark brown page background */
+  background-color: #884f23; /* dark brown page background */
   padding: 1rem 2rem;
 }
  
@@ -39,13 +39,13 @@ h3 {
 }
  
 p {
-  color: #ff0000; /* red */
+  color: #00e1ff; /* blue */
   font-size: 1rem;
   margin-bottom: 1rem;
 }
  
 strong {
-  color: #ff4d4d;
+  color: #1da6be;
 }
  
 em {
@@ -121,7 +121,7 @@ main {
 }
  
 section, article {
-  background-color: #2a1a0d;
+  background-color: #77441b;
   border: 1px solid #5a3d22;
   border-radius: 8px;
   padding: 1.25rem 1.5rem;
@@ -145,8 +145,8 @@ ul li {
    FORMS (enquiry page)
    ========================================================= */
 form {
-  background-color: #2a1a0d;
-  border: 1px solid #5a3d22;
+  background-color: #da711b;
+  border: 1px solid #e9872b;
   border-radius: 8px;
   padding: 1.5rem;
   max-width: 500px;
@@ -183,7 +183,7 @@ form input[type="submit"],
 form input[type="button"] {
   width: auto;
   background-color: #FFD700;
-  color: #2a1a0d;
+  color: #db8a48;
   font-weight: 700;
   border: none;
   cursor: pointer;
