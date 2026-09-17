@@ -1,4 +1,6 @@
-
+/* =========================================================
+   BASE STYLES
+   ========================================================= */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -6,94 +8,240 @@
 }
  
 html {
-  font-size: 100%; /* 1rem = 16px, base for relative units */
-  scroll-behavior: smooth;
+  font-size: 100%;
 }
  
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  color: #222;
-  background-color: #f9f9f9;
+  color: #f0f0f0;
+  background-color: #3b2412; /* dark brown page background */
+  padding: 1rem 2rem;
 }
  
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
- 
-a {
-  text-decoration: none;
-  color: inherit;
-}
- 
-ul {
-  list-style: none;
-}
- /* ---------- 2.3 Typography Styles / Scale ---------- */
-h1, h2, h3 {
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+h1, h2 {
+  color: #FFD700; /* gold */
   font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.5px;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
  
-h1 { font-size: 2.5rem; }   /* typography scale */
+h1 { font-size: 2.5rem; }
 h2 { font-size: 1.75rem; }
-h3 { font-size: 1.25rem; }
+ 
+h3 {
+  color: #FFD700;
+  font-size: 1.25rem;
+  margin: 1.25rem 0 0.5rem;
+}
  
 p {
+  color: #ff0000; /* red */
   font-size: 1rem;
   margin-bottom: 1rem;
 }
  
+strong {
+  color: #ff4d4d;
+}
+ 
+em {
+  color: #ff8080;
+  font-style: italic;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+ 
 /* =========================================================
-   2.4 Layout Structure (Grid + Flexbox)
+   NAVIGATION
    ========================================================= */
- 
-/* Header uses Flexbox */
-.site-header {
+nav {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
- 
-.main-nav ul {
-  display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.5rem;
+  background-color: #2a1a0d;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
 }
  
-/* Overall page uses Grid template areas */
-.page-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "hero"
-    "content"
-    "gallery"
-    "contact";
-  gap: 2rem;
-  padding: 2rem;
-  max-width: 1200px;
+nav a {
+  color: #FFD700;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+ 
+nav a:hover,
+nav a:focus {
+  color: #ffffff;
+}
+ 
+/* =========================================================
+   IMAGE
+   ========================================================= */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+ 
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  background-color: #2a1a0d;
+  margin-top: 2rem;
+  border-radius: 6px;
+}
+ 
+footer p {
+  color: #FFD700;
+  margin: 0;
+}
+ 
+/* =========================================================
+   PAGE STRUCTURE (header, main, section, article)
+   ========================================================= */
+header {
+  margin-bottom: 1rem;
+}
+ 
+main {
+  display: block;
+  max-width: 1100px;
   margin: 0 auto;
 }
  
-.hero        { grid-area: hero; }
-.content-grid{ grid-area: content; }
-.responsive-image-demo { grid-area: gallery; }
-.contact-section { grid-area: contact; }
+section, article {
+  background-color: #2a1a0d;
+  border: 1px solid #5a3d22;
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
  
-/* Content cards use Grid on desktop (3 columns) */
-.content-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+/* =========================================================
+   LISTS
+   ========================================================= */
+ul {
+  list-style: disc;
+  margin-left: 1.5rem;
+  color: #f0f0f0;
+}
+ 
+ul li {
+  margin-bottom: 0.4rem;
+}
+ 
+/* =========================================================
+   FORMS (enquiry page)
+   ========================================================= */
+form {
+  background-color: #2a1a0d;
+  border: 1px solid #5a3d22;
+  border-radius: 8px;
+  padding: 1.5rem;
+  max-width: 500px;
+  margin: 1rem auto;
+}
+ 
+form label {
+  color: #FFD700;
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+ 
+form input,
+form select {
+  width: 100%;
+  padding: 0.6em;
+  margin-top: 0.25rem;
+  border: 1px solid #5a3d22;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #222;
+  font-size: 1rem;
+}
+ 
+form input:focus,
+form select:focus {
+  outline: none;
+  border-color: #FFD700;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+}
+ 
+form input[type="submit"],
+form input[type="button"] {
+  width: auto;
+  background-color: #FFD700;
+  color: #2a1a0d;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  padding: 0.6em 1.5em;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease;
+}
+ 
+form input[type="submit"]:hover,
+form input[type="button"]:hover {
+  background-color: #e6c200;
+}
+ 
+/* =========================================================
+   MAP / IFRAME (contact page)
+   ========================================================= */
+iframe {
+  max-width: 100%;
+  border: 2px solid #FFD700;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+ 
+hr {
+  border: none;
+  border-top: 1px solid #5a3d22;
+  margin: 2rem 0;
+}
+ 
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
+@media (max-width: 1024px) {
+  body { padding: 1rem; }
+  h1 { font-size: 2.2rem; }
+}
+ 
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+ 
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.4rem; }
+ 
+  img {
+    width: 100%;
+    height: auto;
+  }
+ 
+  section, article, form {
+    padding: 1rem;
+  }
+ 
+  iframe {
+    height: 300px;
+  }
 }
  
