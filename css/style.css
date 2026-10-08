@@ -244,4 +244,167 @@ hr {
     height: 300px;
   }
 }
- 
+ /* ==========================================
+   TrendWear - Contact form styles
+   Only affects <form class="contact-form">
+   ========================================== */
+
+.contact-form {
+    --ink: #14202b;
+    --muted: #55636f;
+    --line: #cfd7de;
+    --field-border: #8a98a5;
+    --accent: #0f5c5c;
+    --accent-dark: #0a4343;
+    --error: #b3261e;
+
+    max-width: 640px;
+    padding: 1.5rem;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--ink);
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.5;
+}
+
+/* ---------- Sections ---------- */
+.contact-form fieldset {
+    margin: 0 0 1.5rem;
+    padding: 0;
+    border: 0;
+}
+
+.contact-form legend {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0 0 0.5rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+/* The form uses <br> between label and field, so hide them
+   and let the label sit on its own line instead */
+.contact-form fieldset p {
+    margin: 1rem 0 0;
+}
+
+.contact-form fieldset p br {
+    display: none;
+}
+
+/* ---------- Labels ---------- */
+.contact-form label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+/* ---------- Text fields ---------- */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form select,
+.contact-form textarea {
+    display: block;
+    width: 100%;
+    padding: 0.65rem 0.75rem;
+    box-sizing: border-box;
+    border: 1px solid var(--field-border);
+    border-radius: 6px;
+    background: #ffffff;
+    color: var(--ink);
+    font: inherit;
+}
+
+.contact-form textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.contact-form ::placeholder {
+    color: var(--muted);
+    opacity: 1;
+}
+
+/* ---------- Focus ---------- */
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus,
+.contact-form button:focus {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* ---------- Radio buttons ---------- */
+.contact-form input[type="radio"] {
+    width: 1.1rem;
+    height: 1.1rem;
+    margin: 0 0.4rem 0 0;
+    accent-color: var(--accent);
+    vertical-align: middle;
+}
+
+.contact-form input[type="radio"] + label {
+    display: inline-block;
+    margin: 0 1.5rem 0 0;
+    font-weight: 400;
+}
+
+/* ---------- Buttons ---------- */
+.contact-form button {
+    margin-right: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.contact-form button[type="submit"] {
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #ffffff;
+}
+
+.contact-form button[type="submit"]:hover {
+    background: var(--accent-dark);
+}
+
+.contact-form button[type="reset"] {
+    border: 1px solid var(--field-border);
+    background: transparent;
+    color: var(--ink);
+}
+
+.contact-form button[type="reset"]:hover {
+    background: #f3f5f7;
+}
+
+/* ---------- Validation ----------
+   Kept as separate rules so an older browser that does not
+   understand :user-invalid ignores only that one rule. */
+.contact-form input:user-invalid {
+    border-color: var(--error);
+}
+
+.contact-form select:user-invalid {
+    border-color: var(--error);
+}
+
+.contact-form textarea:user-invalid {
+    border-color: var(--error);
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 560px) {
+    .contact-form {
+        padding: 1rem;
+    }
+
+    .contact-form button {
+        width: 100%;
+        margin: 0 0 0.75rem;
+    }
+}
