@@ -1,0 +1,4 @@
+# Replace YOUR-USERNAME and YOUR-REPOSITORY with your actual GitHub Pages URL.
+User-agent: *
+Allow: /
+Sitemap: https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/sitemap.xml
