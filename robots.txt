@@ -1,4 +1,8 @@
-# Replace YOUR-USERNAME and YOUR-REPOSITORY with your actual GitHub Pages URL.
+
+# TrendWear Clothing Store - Robots.txt
+# Instructions for search engine crawlers
+
 User-agent: *
 Allow: /
-Sitemap: https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/sitemap.xml
+
+Sitemap: https:// ntsika-adams.github.io/TrendWear Clothing Store/sitemap.xml
