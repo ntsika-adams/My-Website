@@ -1,7 +1,7 @@
 /*
  * TrendWear Part 3 JavaScript
  * Features:
- * - Products loaded dynamically from data/products.json (fetch + DOM building)
+ * - Product data (edit PRODUCTS below) rendered with DOM building
  * - Product search, category filter and sorting
  * - Accessible image lightbox (<dialog>)
  * - Accordion (FAQ) and scroll-reveal animation
@@ -17,6 +17,23 @@
 
 // Lets the CSS hide .reveal elements only when JavaScript is actually running.
 document.documentElement.classList.add("js");
+
+// PRODUCT DATA: edit names, prices, sizes, colours, stock and image paths here.
+// Image paths are relative to the page (pages live in /content, so they start with ../images/).
+// Prices, sizes and colours are placeholders: replace them with your real details.
+const PRODUCTS = [
+  {"id": 1, "name": "Women's Everyday Outfit 1", "category": "Women's Clothing", "price": 299, "image": "../images/Womens clothes/Women clothes.png.png", "alt": "Women's everyday outfit from the TrendWear collection, style 1", "description": "Affordable everyday fashion suitable for formal, semi-formal and casual wear.", "sizes": ["S", "M", "L", "XL"], "colours": ["Black", "Navy", "Cream"], "inStock": true},
+  {"id": 2, "name": "Women's Everyday Outfit 2", "category": "Women's Clothing", "price": 349, "image": "../images/Womens clothes/Women clothes1.png.png", "alt": "Women's everyday outfit from the TrendWear collection, style 2", "description": "A versatile women's look that works for work, outings and weekends.", "sizes": ["S", "M", "L", "XL"], "colours": ["Burgundy", "Grey", "White"], "inStock": true},
+  {"id": 3, "name": "Men's Casual Outfit", "category": "Men's Clothing", "price": 329, "image": "../images/Mens clothes/Mens clothes.png.png", "alt": "Men's casual outfit from the TrendWear collection", "description": "Comfortable everyday clothing for the man who loves the outdoors.", "sizes": ["S", "M", "L", "XL"], "colours": ["Khaki", "Navy", "Black"], "inStock": true},
+  {"id": 4, "name": "Men's Smart Outfit", "category": "Men's Clothing", "price": 499, "image": "../images/Mens clothes/Mens clothes2.png.png", "alt": "Men's smart outfit from the TrendWear collection", "description": "A smart, well-fitted option for the everyday suit guy.", "sizes": ["S", "M", "L", "XL"], "colours": ["Charcoal", "Navy"], "inStock": true},
+  {"id": 5, "name": "Everyday Shoes 1", "category": "Shoes", "price": 399, "image": "../images/Shoes/Shoes.png.png", "alt": "Pair of everyday shoes from the TrendWear footwear range", "description": "Practical and fashionable footwear for men, women and children.", "sizes": ["3", "4", "5", "6", "7", "8", "9", "10"], "colours": ["Black", "Brown"], "inStock": true},
+  {"id": 6, "name": "Everyday Shoes 2", "category": "Shoes", "price": 449, "image": "../images/Shoes/Shoes1.png.png", "alt": "Second style of everyday shoes from the TrendWear footwear range", "description": "Comfortable shoes for daily wear, in a range of sizes.", "sizes": ["3", "4", "5", "6", "7", "8", "9", "10"], "colours": ["White", "Grey"], "inStock": true},
+  {"id": 7, "name": "Everyday Accessories 1", "category": "Accessories", "price": 129, "image": "../images/Accessories/Accessories.png.png", "alt": "Accessories that complement an everyday outfit, style 1", "description": "Accessories that complement your everyday outfits.", "sizes": ["One size"], "colours": ["Black", "Brown", "Gold"], "inStock": true},
+  {"id": 8, "name": "Everyday Accessories 2", "category": "Accessories", "price": 149, "image": "../images/Accessories/Accessories1.png.png", "alt": "Accessories that complement an everyday outfit, style 2", "description": "Finish your look with affordable, practical accessories.", "sizes": ["One size"], "colours": ["Silver", "Gold"], "inStock": true},
+  {"id": 9, "name": "School Uniform Set", "category": "School Uniforms", "price": 399, "image": "../images/School Uniform/School Uniform.png.png", "alt": "School uniform set from TrendWear", "description": "Affordable school uniform options for families preparing for the school year.", "sizes": ["6-7", "8-9", "10-11", "12-13"], "colours": ["Grey", "White", "Navy"], "inStock": true},
+  {"id": 10, "name": "Baby Wear Set 1", "category": "Baby Wear", "price": 179, "image": "../images/Kids clothes/Kids clothes.png.png", "alt": "Baby clothing set from the TrendWear baby-wear range, style 1", "description": "Comfortable and affordable clothing for babies.", "sizes": ["0-3 months", "3-6 months", "6-12 months"], "colours": ["Yellow", "White", "Blue"], "inStock": true},
+  {"id": 11, "name": "Baby Wear Set 2", "category": "Baby Wear", "price": 199, "image": "../images/Kids clothes/Kids clothes1.png.png", "alt": "Baby clothing set from the TrendWear baby-wear range, style 2", "description": "Soft, comfortable everyday baby clothing.", "sizes": ["0-3 months", "3-6 months", "6-12 months"], "colours": ["Pink", "White", "Grey"], "inStock": true}
+];
 
 // PLACEHOLDER store data: replace with TrendWear's real shopping centres.
 const STORES = [
@@ -47,18 +64,7 @@ async function initProducts() {
   const noProducts = document.querySelector("#noProducts");
   if (!grid || !searchInput || !categoryFilter || !sortSelect) return;
 
-  let products;
-  try {
-    const response = await fetch("../data/products.json");
-    if (!response.ok) throw new Error("HTTP " + response.status);
-    products = await response.json();
-  } catch (error) {
-    if (productCount) {
-      productCount.textContent =
-        "Products could not be loaded. Please refresh the page or try again later.";
-    }
-    return;
-  }
+  const products = PRODUCTS;
 
   // Build the category dropdown from the data itself.
   [...new Set(products.map((p) => p.category))].sort().forEach((category) => {
@@ -119,7 +125,13 @@ function buildProductCard(product) {
 
   const image = document.createElement("img");
   image.className = "gallery-image";
-  image.src = product.image;
+  image.src = encodeURI(product.image);
+  image.addEventListener("error", () => {
+    const missing = document.createElement("p");
+    missing.className = "notice";
+    missing.textContent = `Picture not found: ${product.image}. Check the folder and file name (capital letters and spaces must match exactly).`;
+    imageButton.replaceWith(missing);
+  });
   image.alt = product.alt;
   image.width = 300;
   image.height = 300;
@@ -335,11 +347,12 @@ function prefillProductName() {
   if (requestedProduct && !productField.value) productField.value = requestedProduct;
 }
 
-/* ---------- FORM VALIDATION + AJAX SUBMISSION ---------- */
+/* ---------- FORM VALIDATION (red messages under each field) + AJAX SUBMISSION ---------- */
 
 function initForms() {
   document.querySelectorAll("form[data-ajax-form]").forEach((form) => {
     const status = form.querySelector(".form-status");
+    form.noValidate = true; // we show our own red messages instead of browser pop-ups
 
     function showStatus(message, type) {
       if (!status) return;
@@ -347,31 +360,103 @@ function initForms() {
       status.className = `form-status ${type}`;
     }
 
+    // Group the visible fields by name (radio buttons share one group)
+    const groups = new Map();
+    form.querySelectorAll("input, select, textarea").forEach((control) => {
+      if (!control.name || control.name.startsWith("_")) return;
+      if (["hidden", "submit", "reset", "button"].includes(control.type)) return;
+      if (!groups.has(control.name)) groups.set(control.name, []);
+      groups.get(control.name).push(control);
+    });
+
+    // Create a red message element directly under every field
+    const errors = new Map();
+    groups.forEach((controls, name) => {
+      const last = controls[controls.length - 1];
+      const error = document.createElement("span");
+      error.className = "field-error";
+      error.id = `error-${last.id || name}`;
+      error.setAttribute("role", "alert");
+      error.hidden = true;
+      const anchor = last.type === "radio" ? (last.closest("p") || last) : last;
+      anchor.insertAdjacentElement("afterend", error);
+      controls.forEach((control) => control.setAttribute("aria-describedby", error.id));
+      errors.set(name, error);
+    });
+
+    function labelText(control) {
+      const label = control.id ? form.querySelector(`label[for="${control.id}"]`) : null;
+      return label ? label.textContent.replace(/[*:]/g, "").trim() : "This field";
+    }
+
+    function getMessage(controls) {
+      const control = controls[0];
+
+      if (control.type === "radio") {
+        return controls.some((radio) => radio.checked) ? "" : "Please choose an option.";
+      }
+
+      const value = control.value.trim();
+      if (control.required && !value) {
+        return control.tagName === "SELECT"
+          ? `Please choose an option for ${labelText(control).toLowerCase()}.`
+          : `${labelText(control)} is required.`;
+      }
+      if (!value) return "";
+
+      if (control.type === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+        return "Enter a valid email address, e.g. name@example.com.";
+      }
+      if ((control.name === "fullname" || control.name === "name") &&
+          !/^[\p{L}\p{M} .'-]{2,80}$/u.test(value)) {
+        return "Enter a valid name using letters only (at least two).";
+      }
+      if ((control.name === "phone" || control.name === "number") &&
+          !/^[0-9 +()-]{7,20}$/.test(value)) {
+        return "Enter a valid phone number, e.g. 082 123 4567.";
+      }
+      if (control.pattern && !new RegExp(`^(?:${control.pattern})$`).test(value)) {
+        return control.title || "Please use the requested format.";
+      }
+      return "";
+    }
+
+    // Returns true when the field is valid; shows or hides the red message
+    function validateGroup(name) {
+      const controls = groups.get(name);
+      const error = errors.get(name);
+      const message = getMessage(controls);
+      error.textContent = message;
+      error.hidden = !message;
+      controls.forEach((control) => {
+        if (message) control.setAttribute("aria-invalid", "true");
+        else control.removeAttribute("aria-invalid");
+      });
+      return !message;
+    }
+
+    // Validate when leaving a field, then keep updating while the person fixes it
+    form.addEventListener("focusout", (event) => {
+      if (groups.has(event.target.name)) validateGroup(event.target.name);
+    });
+    form.addEventListener("input", (event) => {
+      const name = event.target.name;
+      if (groups.has(name) && !errors.get(name).hidden) validateGroup(name);
+    });
+    form.addEventListener("change", (event) => {
+      if (groups.has(event.target.name)) validateGroup(event.target.name);
+    });
+
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      // First use built-in HTML validation rules (required, type=email, pattern, minlength).
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        showStatus("Please correct the highlighted fields before submitting.", "error");
-        return;
-      }
-
-      const nameInput = form.querySelector('[name="fullname"], [name="name"]');
-      if (nameInput && !/^[\p{L}\p{M} .'-]{2,80}$/u.test(nameInput.value.trim())) {
-        nameInput.setCustomValidity("Enter a name using at least two letters.");
-        nameInput.reportValidity();
-        nameInput.setCustomValidity("");
-        showStatus("Please enter a valid name.", "error");
-        return;
-      }
-
-      const phoneInput = form.querySelector('[name="phone"], [name="number"]');
-      if (phoneInput && !/^[0-9 +()-]{7,20}$/.test(phoneInput.value.trim())) {
-        phoneInput.setCustomValidity("Enter a valid phone number.");
-        phoneInput.reportValidity();
-        phoneInput.setCustomValidity("");
-        showStatus("Please enter a valid phone number.", "error");
+      let firstInvalid = null;
+      groups.forEach((controls, name) => {
+        if (!validateGroup(name) && !firstInvalid) firstInvalid = controls[0];
+      });
+      if (firstInvalid) {
+        firstInvalid.focus();
+        showStatus("Please fix the errors shown in red before submitting.", "error");
         return;
       }
 
@@ -418,6 +503,8 @@ function initForms() {
     });
 
     form.addEventListener("reset", () => {
+      errors.forEach((error) => { error.hidden = true; error.textContent = ""; });
+      form.querySelectorAll("[aria-invalid]").forEach((c) => c.removeAttribute("aria-invalid"));
       if (status) {
         status.textContent = "";
         status.className = "form-status";
