@@ -1,4 +1,3 @@
-
 "use strict";
 
 // Lets the CSS hide .reveal elements only when JavaScript is actually running.
@@ -21,20 +20,11 @@ const PRODUCTS = [
   {"id": 11, "name": "Baby Wear Set 2", "category": "Baby Wear", "price": 199, "image": "../images/Kids clothes/Kids clothes1.png.png", "alt": "Baby clothing set from the TrendWear baby-wear range, style 2", "description": "Soft, comfortable everyday baby clothing.", "sizes": ["0-3 months", "3-6 months", "6-12 months"], "colours": ["Pink", "White", "Grey"], "inStock": true}
 ];
 
-// PLACEHOLDER store data: replace with TrendWear's real shopping centres.
-const STORES = [
-  { name: "TrendWear Johannesburg", centre: "Example shopping centre, Johannesburg", lat: -26.2041, lng: 28.0473 },
-  { name: "TrendWear Cape Town", centre: "Example shopping centre, Cape Town", lat: -33.9249, lng: 18.4241 },
-  { name: "TrendWear Durban", centre: "Example shopping centre, Durban", lat: -29.8587, lng: 31.0218 },
-  { name: "TrendWear Gqeberha", centre: "Example shopping centre, Gqeberha", lat: -33.9494, lng: 25.5771 }
-];
-
 document.addEventListener("DOMContentLoaded", () => {
   initProducts();
   initLightbox();
   initAccordions();
   initRevealOnScroll();
-  initStoreMap();
   prefillProductName();
   initForms();
 });
@@ -303,99 +293,6 @@ function initRevealOnScroll() {
   items.forEach((item) => observer.observe(item));
 }
 
-/* ---------- INTERACTIVE STORE MAP (Leaflet + OpenStreetMap) ---------- */
-
-function initStoreMap() {
-  const mapElement = document.querySelector("#storeMap");
-  if (!mapElement) return;
-
-  if (!window.L) {
-    mapElement.textContent =
-      "The interactive map could not load. Please check your connection and refresh the page.";
-    return;
-  }
-
-  const map = L.map(mapElement).setView([-29.0, 24.5], 5);
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: "&copy; OpenStreetMap contributors"
-  }).addTo(map);
-
-  const list = document.querySelector("#storeList");
-  const markers = new Map();
-
-  STORES.forEach((store) => {
-    const popup = document.createElement("div");
-    const title = document.createElement("strong");
-    title.textContent = store.name;
-    const centre = document.createElement("p");
-    centre.textContent = store.centre;
-    popup.append(title, centre);
-
-    const marker = L.marker([store.lat, store.lng], { title: store.name })
-      .addTo(map)
-      .bindPopup(popup);
-    markers.set(store.name, marker);
-
-    if (list) {
-      const item = document.createElement("li");
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "button-link";
-      button.textContent = store.name;
-      button.addEventListener("click", () => {
-        map.flyTo([store.lat, store.lng], 12);
-        marker.openPopup();
-      });
-      item.append(button);
-      list.append(item);
-    }
-  });
-
-  // Location-based feature: find the nearest store to the visitor.
-  const findNearest = document.querySelector("#findNearest");
-  const nearestStatus = document.querySelector("#nearestStatus");
-
-  function distanceKm(lat1, lng1, lat2, lng2) {
-    const toRad = (deg) => (deg * Math.PI) / 180;
-    const a =
-      Math.sin(toRad(lat2 - lat1) / 2) ** 2 +
-      Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(toRad(lng2 - lng1) / 2) ** 2;
-    return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  }
-
-  if (findNearest) {
-    findNearest.addEventListener("click", () => {
-      if (!navigator.geolocation) {
-        if (nearestStatus) nearestStatus.textContent = "Your browser does not support location lookup.";
-        return;
-      }
-      if (nearestStatus) nearestStatus.textContent = "Finding your location...";
-
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          const nearest = STORES
-            .map((store) => ({ store, km: distanceKm(latitude, longitude, store.lat, store.lng) }))
-            .sort((a, b) => a.km - b.km)[0];
-          map.flyTo([nearest.store.lat, nearest.store.lng], 11);
-          markers.get(nearest.store.name).openPopup();
-          if (nearestStatus) {
-            nearestStatus.textContent =
-              `Your nearest store is ${nearest.store.name}, about ${Math.round(nearest.km)} km away.`;
-          }
-        },
-        () => {
-          if (nearestStatus) {
-            nearestStatus.textContent =
-              "We could not get your location. You can still choose a store from the list.";
-          }
-        }
-      );
-    });
-  }
-}
-
 /* ---------- ENQUIRY: prefill product name from ?product=... ---------- */
 
 function prefillProductName() {
@@ -518,6 +415,15 @@ function initForms() {
         return;
       }
 
+      // Browsers block form relays when a page is opened straight from a folder (file://).
+      if (window.location.protocol === "file:") {
+        showStatus(
+          "This form can only send from a live website. Open the site with a local server (for example VS Code Live Server) or deploy it, then try again.",
+          "error"
+        );
+        return;
+      }
+
       const submitButton = form.querySelector('[type="submit"]');
       const originalButtonText = submitButton ? submitButton.textContent : "";
       const originalButtonValue = submitButton ? submitButton.value : "";
@@ -536,8 +442,12 @@ function initForms() {
           headers: { "Accept": "application/json" }
         });
 
-        if (!response.ok) {
-          throw new Error("The form service returned an unsuccessful response.");
+        let result = null;
+        try { result = await response.json(); } catch (parseError) { /* not JSON */ }
+
+        if (!response.ok || (result && String(result.success) === "false")) {
+          const reason = result && result.message ? result.message : `HTTP ${response.status}`;
+          throw new Error(reason);
         }
 
         showStatus(
@@ -547,10 +457,19 @@ function initForms() {
         );
         form.reset();
       } catch (error) {
-        showStatus(
-          "We could not confirm submission. Check your internet connection and the form service settings, then try again.",
-          "error"
-        );
+        console.error("Form submission failed:", error);
+        const reason = String(error && error.message ? error.message : "");
+        if (/activat/i.test(reason)) {
+          showStatus(
+            "This form has not been activated yet. Open the activation email FormSubmit sent to info@trendwear.co.za (check spam), click the link, then send again.",
+            "error"
+          );
+        } else {
+          showStatus(
+            "We could not send your message. Please check your internet connection and try again, or email us at info@trendwear.co.za.",
+            "error"
+          );
+        }
       } finally {
         if (submitButton) {
           submitButton.disabled = false;

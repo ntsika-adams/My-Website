@@ -28,11 +28,6 @@
     </script>
 
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-    <!-- Leaflet must load before script.js (both are deferred, so they run in this order) -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="" defer></script>
     <script src="../js/script.js" defer></script>
 </head>
 
@@ -85,9 +80,12 @@
         <p>Please complete the form below and our customer support team will get back to you.</p>
         <p>* Required field</p>
 
-        <form action="https://formsubmit.co/ajax/info@trendwear.co.za"
-              method="POST"
-              data-ajax-form
+       <form action="https://formspree.io/f/xyeeprav"
+      method="POST"
+      data-ajax-form
+      data-success-message="Thank you! We have received your message and a confirmation has been sent to your email address. Our team will reply by your preferred contact method soon.">
+
+             <data-ajax-form
               data-success-message="Thank you! We have received your message and a confirmation has been sent to your email address. Our team will reply by your preferred contact method soon.">
 
             <!-- FormSubmit settings (hidden) -->
@@ -228,16 +226,18 @@
 
             <h3>Store Locator</h3>
 
-            <p>
-                <button type="button" id="findNearest" class="button-link">Find my nearest store</button>
-            </p>
-            <p id="nearestStatus" role="status" aria-live="polite"></p>
+            <!-- Google Maps -->
+            <iframe
+                title="TrendWear store locator map"
+                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3309.6775460198946!2d25.577109952114608!3d-33.94942072039442!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2sza!4v1789560490496!5m2!1sen!2sza"
+                width="600"
+                height="450"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin">
+            </iframe>
 
-            <!-- Interactive map (Leaflet + OpenStreetMap), built by script.js -->
-            <div id="storeMap" class="map" role="region" aria-label="Map of TrendWear stores"></div>
-
-            <p>Select a store to zoom the map to it:</p>
-            <ul id="storeList" class="store-list"></ul>
+            <br><br>
         </section>
 
     </main>

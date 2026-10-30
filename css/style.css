@@ -464,17 +464,6 @@ button.button-link { border: 0; cursor: pointer; font: inherit; font-weight: 700
 .accordion-panel:not([hidden]) { animation: panelIn 0.25s ease-out; }
 .accordion-panel p { margin-bottom: 0; }
 
-/* Interactive store map (Leaflet) */
-.map {
-  height: 420px; max-width: 100%; margin: 1rem 0;
-  border: 2px solid #FFD700; border-radius: 8px;
-}
-/* The global img rule above would break Leaflet's tiles, so reset it inside the map */
-.map img { margin: 0; border-radius: 0; box-shadow: none; transition: none; }
-.leaflet-popup-content p, .leaflet-popup-content strong { color: #2a1a0d; }
-.leaflet-popup-content p { margin: 0.25rem 0 0; }
-.store-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; list-style: none; }
-.store-list li { margin: 0; }
 
 /* Scroll reveal: only hides content when JavaScript is running */
 .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
