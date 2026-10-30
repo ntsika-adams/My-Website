@@ -424,6 +424,72 @@ select:focus-visible, textarea:focus-visible {
   .catalogue-tools h2, .catalogue-tools p { grid-column: auto; }
   .hero { padding: 1rem; }
 }
+
+/* =========================================================
+   PART 3 (SECOND PASS): DYNAMIC PRODUCTS, ACCORDION, MAP, ANIMATION
+   ========================================================= */
+
+/* Labels in the product search tools (they sit outside the orange form) */
+.catalogue-tools label { display: block; font-weight: 600; margin-bottom: 0.25rem; }
+
+/* Product cards built by script.js */
+.product-card { animation: cardIn 0.25s ease-out; }
+.product-card .price { color: #FFD700; font-weight: 700; }
+.image-button {
+  display: block; width: 100%; padding: 0; border: 0; background: none;
+  border-radius: 8px; overflow: hidden; cursor: zoom-in;
+}
+.image-button img { transition: transform 0.25s ease; }
+.image-button:hover img { transform: scale(1.04); }
+.lightbox[open] { animation: cardIn 0.2s ease-out; }
+
+/* <button> elements that use the gold .button-link look */
+button.button-link { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
+
+/* Accordion (FAQ on the contact page) */
+.accordion h3 { margin: 0 0 0.5rem; }
+.accordion-trigger {
+  display: flex; justify-content: space-between; width: 100%;
+  padding: 0.75rem 1rem; font: inherit; font-weight: 700; text-align: left;
+  color: #FFD700; background: #713d17; border: 1px solid #5a3d22;
+  border-radius: 6px; cursor: pointer;
+}
+.accordion-trigger:hover { background: #5f3212; }
+.accordion-trigger::after { content: "+"; }
+.accordion-trigger[aria-expanded="true"]::after { content: "\2212"; }
+.accordion-panel {
+  margin: -0.25rem 0 0.75rem; padding: 0.75rem 1rem;
+  background: #713d17; border: 1px solid #5a3d22; border-radius: 0 0 6px 6px;
+}
+.accordion-panel:not([hidden]) { animation: panelIn 0.25s ease-out; }
+.accordion-panel p { margin-bottom: 0; }
+
+/* Interactive store map (Leaflet) */
+.map {
+  height: 420px; max-width: 100%; margin: 1rem 0;
+  border: 2px solid #FFD700; border-radius: 8px;
+}
+/* The global img rule above would break Leaflet's tiles, so reset it inside the map */
+.map img { margin: 0; border-radius: 0; box-shadow: none; transition: none; }
+.leaflet-popup-content p, .leaflet-popup-content strong { color: #2a1a0d; }
+.leaflet-popup-content p { margin: 0.25rem 0 0; }
+.store-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; list-style: none; }
+.store-list li { margin: 0; }
+
+/* Scroll reveal: only hides content when JavaScript is running */
+.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.js .reveal.visible { opacity: 1; transform: none; }
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .js .reveal { opacity: 1; transform: none; }
 }

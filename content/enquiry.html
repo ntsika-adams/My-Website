@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Enquiry</title>
+    <title>Product Enquiry | Ask TrendWear About Sizes and Stock</title>
+    <meta name="description" content="Ask TrendWear about a product, size, stock availability, delivery or click-and-collect. Send an enquiry and get an automatic confirmation by email.">
+    <link rel="canonical" href="https://YOUR-SITE.netlify.app/content/enquiry.html">
+
+    <!-- Social sharing (Open Graph) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TrendWear Product Enquiry">
+    <meta property="og:description" content="Ask about sizes, stock, delivery or click-and-collect.">
+    <meta property="og:url" content="https://YOUR-SITE.netlify.app/content/enquiry.html">
+
     <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/script.js" defer></script>
 </head>
 <body>
+
     <h1 style="text-align: center;">PRODUCT ENQUIRY</h1>
- 
+
     <!--Navigation-->
     <nav>
         <a href="../index.html">Home</a>
@@ -17,55 +28,73 @@
         <a href="enquiry.html">Enquiry</a>
         <a href="contact.html">Contact</a>
     </nav>
- 
-    <h2>Have a question about one of our products?</h2>
- 
-    <p>Complete the enquiry form and the TrendWear team will assist you.</p>
- 
-    <form>
-        <p>Required Information:</p>
- 
-        <label for="name">Your Name:</label><br>
-        <input type="text" id="name" name="name" placeholder="Your Name" required>
-        <br><br>
- 
-        <label for="email">Email Address:</label><br>
-        <input type="email" id="email" name="email" placeholder="Your Email" required>
-        <br><br>
- 
-        <label for="number">Phone Number:</label><br>
-        <input type="tel" id="number" name="number" pattern="[0-9]{10}" placeholder="Your phone number" required>
-        <br><br>
- 
-        <h4>Enquiry Type:</h4>
-        <label for="enquiry-type">Enquiry Type</label><br>
-        <select id="enquiry-type" name="enquiry-type" required>
-            <option value="">---Select an option---</option>
-            <option value="Product enquiry">Product enquiry</option>
-            <option value="Size enquiry">Size enquiry</option>
-            <option value="Stock availability">Stock availability</option>
-            <option value="Delivery enquiry">Delivery enquiry</option>
-            <option value="Click-and-collect enquiry">Click-and-collect enquiry</option>
-            <option value="General enquiry">General enquiry</option>
-        </select>
-        <br><br>
- 
-        <label for="product-name">Product Name:</label><br>
-        <input type="text" id="product-name" name="product-name" placeholder="Product Name" required>
-        <br><br>
- 
-        <label for="message">Message:</label><br>
-        <input type="text" id="message" name="message" placeholder="Message" required>
-        <br><br>
- 
-        <p>We aim to respond to customer enquiries as soon as possible.</p>
- 
-        <input type="submit" value="Submit Enquiry">
-    </form>
- 
+
+    <main>
+        <h2>Have a question about one of our products?</h2>
+
+        <p>Complete the enquiry form and the TrendWear team will assist you.
+            Not sure what to ask about? Browse our <a href="products.html">products</a> first,
+            or see the <a href="contact.html">contact page</a> for other ways to reach us.</p>
+
+        <form action="https://formsubmit.co/ajax/info@trendwear.co.za"
+              method="POST"
+              data-ajax-form
+              data-success-message="Thank you! Your enquiry has been received. We have sent a confirmation to your email address and our team will respond as soon as possible.">
+
+            <!-- FormSubmit settings (hidden) -->
+            <input type="hidden" name="_subject" value="New TrendWear product enquiry">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_autoresponse"
+                   value="Hi, thank you for contacting TrendWear. We have received your enquiry and our team will get back to you as soon as possible. Please do not reply to this automated message.">
+            <!-- Honeypot to catch spam bots: must stay empty -->
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+            <p>Required Information:</p>
+
+            <label for="name">Your Name:</label><br>
+            <input type="text" id="name" name="name" placeholder="Your Name" autocomplete="name" required>
+            <br><br>
+
+            <label for="email">Email Address:</label><br>
+            <input type="email" id="email" name="email" placeholder="Your Email" autocomplete="email" required>
+            <br><br>
+
+            <label for="number">Phone Number:</label><br>
+            <input type="tel" id="number" name="number" pattern="[0-9]{10}" title="Enter a 10-digit phone number, e.g. 0821234567" placeholder="Your phone number" autocomplete="tel" required>
+            <br><br>
+
+            <label for="enquiry-type">Enquiry Type:</label><br>
+            <select id="enquiry-type" name="enquiry-type" required>
+                <option value="">---Select an option---</option>
+                <option value="Product enquiry">Product enquiry</option>
+                <option value="Size enquiry">Size enquiry</option>
+                <option value="Stock availability">Stock availability</option>
+                <option value="Delivery enquiry">Delivery enquiry</option>
+                <option value="Click-and-collect enquiry">Click-and-collect enquiry</option>
+                <option value="General enquiry">General enquiry</option>
+            </select>
+            <br><br>
+
+            <label for="product-name">Product Name:</label><br>
+            <input type="text" id="product-name" name="product-name" placeholder="Product Name" required>
+            <br><br>
+
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="5" cols="40" placeholder="Message" required></textarea>
+            <br><br>
+
+            <p>We aim to respond to customer enquiries as soon as possible.</p>
+
+            <input type="submit" value="Submit Enquiry">
+
+            <!-- Response message appears here -->
+            <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+    </main>
+
     <footer style="text-align: center; padding: 10px 0;">
         <p>&copy; 2026 TRENDWEAR. All Rights Reserved.</p>
     </footer>
 </body>
 </html>
- 

@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrendWear Products</title>
+    <title>Women's, Men's, Kids' Clothing, Shoes and School Uniforms | TrendWear</title>
+    <meta name="description" content="Browse TrendWear women's and men's clothing, shoes, accessories, school uniforms and baby wear. Search, filter and sort, then send an enquiry.">
+    <link rel="canonical" href="https://YOUR-SITE.netlify.app/content/products.html">
+
+    <!-- Social sharing (Open Graph) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="TrendWear Products">
+    <meta property="og:description" content="Affordable family fashion: clothing, shoes, accessories, school uniforms and baby wear.">
+    <meta property="og:url" content="https://YOUR-SITE.netlify.app/content/products.html">
+
     <link rel="stylesheet" href="../css/style.css">
+    <script src="../data/products-data.js" defer></script>
+    <script src="../js/script.js" defer></script>
 </head>
 <body>
- 
+
     <!-- Header & Brand Layout -->
     <header>
         <h1 style="text-align: center;">TRENDWEAR PRODUCTS</h1>
@@ -20,86 +31,171 @@
             <a href="contact.html">Contact</a>
         </nav>
     </header>
- 
-    <!-- Main Content Container with Semantic Sections -->
+
     <main>
- 
-        <!-- Women's Section -->
-        <section>
-            <h2>Women's Clothing</h2>
-            <p>Our women's collection provides affordable everyday fashion suitable for different occasions. Whether it's for formal, semi-formal or casual wear, we have all the varieties.</p>
-            <img src="../images/Womens clothes/Women clothes.png.png" alt="Womens Clothing" width="300" height="300">
-            <img src="../images/Womens clothes/Women clothes1.png.png" alt="Womens Clothing" width="300" height="300">
-        </section>
-        <br>
- 
-        <!-- Men's Section -->
-        <section>
-            <h2>Men's Clothing</h2>
-            <p>Our men's collection includes affordable everyday clothing designed for comfort and style. If you are a man who loves the outdoors, we have the right fit for you; if you are an everyday suit guy, we also have them for you.</p>
-            <img src="../images/Mens clothes/Mens clothes.png.png" alt="Mens Clothing" width="300" height="300">
-            <img src="../images/Mens clothes/Mens clothes2.png.png" alt="Mens Clothing" width="300" height="300">
-        </section>
-        <br>
- 
-        <!-- Shoes Section -->
-        <section>
-            <h2>Shoes</h2>
-            <p>Our footwear range provides practical and fashionable options for men, women and children.</p>
-            <img src="../images/Shoes/Shoes.png.png" alt="Shoes" width="300" height="300">
-            <img src="../images/Shoes/Shoes1.png.png" alt="Shoes" width="300" height="300">
-        </section>
-        <br>
- 
-        <!-- Accessories Section -->
-        <section>
-            <h2>Accessories</h2>
-            <p>Customers can find accessories that complement their everyday outfits.</p>
-            <img src="../images/Accessories/Accessories.png.png" alt="Accessories" width="300" height="300">
-            <img src="../images/Accessories/Accessories1.png.png" alt="Accessories" width="300" height="300">
-        </section>
-        <br>
- 
-        <!-- School Uniforms Section -->
-        <section>
-            <h2>School Uniforms</h2>
-            <p>TrendWear provides affordable school uniform options for families preparing for the school year.</p>
-            <img src="../images/School Uniform/School Uniform.png.png" alt="School Uniform" width="300" height="300">
-        </section>
-        <br>
- 
-        <!-- Baby Wear Section -->
-        <section>
-            <h2>Baby Wear</h2>
-            <p>Our baby-wear collection provides comfortable and affordable clothing for babies.</p>
-            <img src="../images/Kids clothes/Kids clothes.png.png" alt="Baby Wear" width="300" height="300">
-            <img src="../images/Kids clothes/Kids clothes1.png.png" alt="Baby Wear" width="300" height="300">
-        </section>
-        <br>
- 
-        <!-- Product Requirements Outline Info -->
-        <article>
-            <h3>Product Information</h3>
-            <p>Each product should include:</p>
-            <ul>
-                <li>Product name</li>
-                <li>Product image</li>
-                <li>Product description</li>
-                <li>Price</li>
-                <li>Available sizes</li>
-                <li>Available colours</li>
-                <li>Stock availability</li>
-            </ul>
-        </article>
- 
+
+        <!-- Search, filter and sort -->
+        <div class="catalogue-tools">
+            <h2>Find a product</h2>
+            <p id="productCount" role="status" aria-live="polite">Showing all 11 products.</p>
+
+            <div>
+                <label for="productSearch">Search</label>
+                <input type="search" id="productSearch" placeholder="e.g. school, baby, shoes">
+            </div>
+
+            <div>
+                <label for="categoryFilter">Category</label>
+                <select id="categoryFilter">
+                    <option value="all">All categories</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="productSort">Sort by</label>
+                <select id="productSort">
+                    <option value="default">Featured</option>
+                    <option value="price-asc">Price: low to high</option>
+                    <option value="price-desc">Price: high to low</option>
+                    <option value="name">Name: A to Z</option>
+                </select>
+            </div>
+        </div>
+
+        <p>Select an image to see it larger, then <a href="enquiry.html">send an enquiry</a>
+            or <a href="contact.html">contact us</a> about stock, delivery or click-and-collect.</p>
+
+        <!-- Product cards are built by script.js from data/products.json -->
+        <div id="productGrid" class="product-grid">
+            <!-- Pictures are written in the HTML so they always show; script.js then adds search, filter and sort -->
+            <article class="product-card">
+                <button type="button" class="image-button" aria-label="View larger image of Women&#x27;s Everyday Outfit 1">
+                    <img class="gallery-image" src="../images/Womens%20clothes/Women%20clothes.png.png" alt="Women&#x27;s everyday outfit from the TrendWear collection, style 1" width="300" height="300" loading="lazy">
+                </button>
+                <h2>Women&#x27;s Everyday Outfit 1</h2>
+                <p>Affordable everyday fashion suitable for formal, semi-formal and casual wear.</p>
+                <p class="price">R 299,00</p>
+                <p class="product-details">Sizes: S, M, L, XL | Colours: Black, Navy, Cream | In stock</p>
+                <a class="button-link" href="enquiry.html?product=Women%27s%20Everyday%20Outfit%201">Enquire about Women&#x27;s Everyday Outfit 1</a>
+            </article>
+            <article class="product-card">
+                <button type="button" class="image-button" aria-label="View larger image of Women&#x27;s Everyday Outfit 2">
+                    <img class="gallery-image" src="../images/Womens%20clothes/Women%20clothes1.png.png" alt="Women&#x27;s everyday outfit from the TrendWear collection, style 2" width="300" height="300" loading="lazy">
+                </button>
+                <h2>Women&#x27;s Everyday Outfit 2</h2>
+                <p>A versatile women&#x27;s look that works for work, outings and weekends.</p>
+                <p class="price">R 349,00</p>
+                <p class="product-details">Sizes: S, M, L, XL | Colours: Burgundy, Grey, White | In stock</p>
+                <a class="button-link" href="enquiry.html?product=Women%27s%20Everyday%20Outfit%202">Enquire about Women&#x27;s Everyday Outfit 2</a>
+            </article>
+            <article class="product-card">
+                <button type="button" class="image-button" aria-label="View larger image of Men&#x27;s Casual Outfit">
+                    <img class="gallery-image" src="../images/Mens%20clothes/Mens%20clothes.png.png" alt="Men&#x27;s casual outfit from the TrendWear collection" width="300" height="300" loading="lazy">
+                </button>
+                <h2>Men&#x27;s Casual Outfit</h2>
+                <p>Comfortable everyday clothing for the man who loves the outdoors.</p>
+                <p class="price">R 329,00</p>
+                <p class="product-details">Sizes: S, M, L, XL | Colours: Khaki, Navy, Black | In stock</p>
+                <a class="button-link" href="enquiry.html?product=Men%27s%20Casual%20Outfit">Enquire about Men&#x27;s Casual Outfit</a>
+            </article>
+            <article class="product-card">
+                <button type="button" class="image-button" aria-label="View larger image of Men&#x27;s Smart Outfit">
+                    <img class="gallery-image" src="../images/Mens%20clothes/Mens%20clothes2.png.png" alt="Men&#x27;s smart outfit from the TrendWear collection" width="300" height="300" loading="lazy">
+                </button>
+                <h2>Men&#x27;s Smart Outfit</h2>
+                <p>A smart, well-fitted option for the everyday suit guy.</p>
+                <p class="price">R 499,00</p>
+                <p class="product-details">Sizes: S, M, L, XL | Colours: Charcoal, Navy | In stock</p>
+                <a class="button-link" href="enquiry.html?product=Men%27s%20Smart%20Outfit">Enquire about Men&#x27;s Smart Outfit</a>
+            </article>
+            <article class="product-card">
+                <button type="button" class="image-button" aria-label="View larger image of Everyday Shoes 1">
+                    <img class="gallery-image" src="../images/Shoes/Shoes.png.png" alt="Pair of everyday shoes from the TrendWear footwear range" width="300" height="300" loading="lazy">
+                </button>
+                <h2>Everyday Shoes 1</h2>
+                <p>Practical and fashionable footwear for men, women and children.</p>
+                <p class="price">R 399,00</p>
+                <p class="product-details">Sizes: 3, 4, 5, 6, 7, 8, 9, 10 | Colours: Black, Brown | In stock</p>
+                <a class="button-link" href="enquiry.html?product=Everyday%20Shoes%201">Enquire about Everyday Shoes 1</a>
+            </article>
+            <article class="product-card">
+                <button type="button" class="image-button" aria-label="View larger image of Everyday Shoes 2">
+                    <img class="gallery-image" src="../images/Shoes/Shoes1.png.png" alt="Second style of everyday shoes from the TrendWear footwear range" width="300" height="300" loading="lazy">
+                </button>
+                <h2>Everyday Shoes 2</h2>
+                <p>Comfortable shoes for daily wear, in a range of sizes.</p>
+                <p class="price">R 449,00</p>
+                <p class="product-details">Sizes: 3, 4, 5, 6, 7, 8, 9, 10 | Colours: White, Grey | In stock</p>
+                <a class="button-link" href="enquiry.html?product=Everyday%20Shoes%202">Enquire about Everyday Shoes 2</a>
+            </article>
+            <article class="product-card">
+                <button type="button" class="image-button" aria-label="View larger image of Everyday Accessories 1">
+                    <img class="gallery-image" src="../images/Accessories/Accessories.png.png" alt="Accessories that complement an everyday outfit, style 1" width="300" height="300" loading="lazy">
+                </button>
+                <h2>Everyday Accessories 1</h2>
+                <p>Accessories that complement your everyday outfits.</p>
+                <p class="price">R 129,00</p>
+                <p class="product-details">Sizes: One size | Colours: Black, Brown, Gold | In stock</p>
+                <a class="button-link" href="enquiry.html?product=Everyday%20Accessories%201">Enquire about Everyday Accessories 1</a>
+            </article>
+            <article class="product-card">
+                <button type="button" class="image-button" aria-label="View larger image of Everyday Accessories 2">
+                    <img class="gallery-image" src="../images/Accessories/Accessories1.png.png" alt="Accessories that complement an everyday outfit, style 2" width="300" height="300" loading="lazy">
+                </button>
+                <h2>Everyday Accessories 2</h2>
+                <p>Finish your look with affordable, practical accessories.</p>
+                <p class="price">R 149,00</p>
+                <p class="product-details">Sizes: One size | Colours: Silver, Gold | In stock</p>
+                <a class="button-link" href="enquiry.html?product=Everyday%20Accessories%202">Enquire about Everyday Accessories 2</a>
+            </article>
+            <article class="product-card">
+                <button type="button" class="image-button" aria-label="View larger image of School Uniform Set">
+                    <img class="gallery-image" src="../images/School%20Uniform/School%20Uniform.png.png" alt="School uniform set from TrendWear" width="300" height="300" loading="lazy">
+                </button>
+                <h2>School Uniform Set</h2>
+                <p>Affordable school uniform options for families preparing for the school year.</p>
+                <p class="price">R 399,00</p>
+                <p class="product-details">Sizes: 6-7, 8-9, 10-11, 12-13 | Colours: Grey, White, Navy | In stock</p>
+                <a class="button-link" href="enquiry.html?product=School%20Uniform%20Set">Enquire about School Uniform Set</a>
+            </article>
+            <article class="product-card">
+                <button type="button" class="image-button" aria-label="View larger image of Baby Wear Set 1">
+                    <img class="gallery-image" src="../images/Kids%20clothes/Kids%20clothes.png.png" alt="Baby clothing set from the TrendWear baby-wear range, style 1" width="300" height="300" loading="lazy">
+                </button>
+                <h2>Baby Wear Set 1</h2>
+                <p>Comfortable and affordable clothing for babies.</p>
+                <p class="price">R 179,00</p>
+                <p class="product-details">Sizes: 0-3 months, 3-6 months, 6-12 months | Colours: Yellow, White, Blue | In stock</p>
+                <a class="button-link" href="enquiry.html?product=Baby%20Wear%20Set%201">Enquire about Baby Wear Set 1</a>
+            </article>
+            <article class="product-card">
+                <button type="button" class="image-button" aria-label="View larger image of Baby Wear Set 2">
+                    <img class="gallery-image" src="../images/Kids%20clothes/Kids%20clothes1.png.png" alt="Baby clothing set from the TrendWear baby-wear range, style 2" width="300" height="300" loading="lazy">
+                </button>
+                <h2>Baby Wear Set 2</h2>
+                <p>Soft, comfortable everyday baby clothing.</p>
+                <p class="price">R 199,00</p>
+                <p class="product-details">Sizes: 0-3 months, 3-6 months, 6-12 months | Colours: Pink, White, Grey | In stock</p>
+                <a class="button-link" href="enquiry.html?product=Baby%20Wear%20Set%202">Enquire about Baby Wear Set 2</a>
+            </article>
+        </div>
+
+        <p id="noProducts" class="notice" hidden>No products match your search. Try a different word or category.</p>
+
+        <!-- Lightbox -->
+        <dialog id="lightbox" class="lightbox" aria-labelledby="lightboxCaption">
+            <button type="button" id="closeLightbox" class="lightbox-close">Close</button>
+            <img id="lightboxImage" src="" alt="">
+            <p id="lightboxCaption"></p>
+        </dialog>
+
     </main>
- 
+
     <!-- Semantic Footer Element -->
     <hr>
     <footer style="text-align: center; padding: 10px 0;">
         <p>&copy; 2026 TRENDWEAR. All Rights Reserved.</p>
     </footer>
- 
+
 </body>
 </html>
- 

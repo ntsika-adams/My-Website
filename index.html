@@ -7,6 +7,29 @@
   <meta name="keywords" content="affordable clothing South Africa, family fashion, shoes, school uniforms, baby wear, TrendWear">
   <meta name="robots" content="index, follow">
   <title>TrendWear Clothing Store | Affordable Family Fashion</title>
+  <link rel="canonical" href="https://YOUR-SITE.netlify.app/">
+
+  <!-- Social sharing (Open Graph) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TrendWear Clothing Store">
+  <meta property="og:description" content="Affordable fashion for the whole family: clothing, shoes, accessories, school uniforms and baby wear.">
+  <meta property="og:url" content="https://YOUR-SITE.netlify.app/">
+  <meta property="og:image" content="https://YOUR-SITE.netlify.app/images/Logos/Logo%20Image.png.png">
+
+  <!-- Local SEO: structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ClothingStore",
+    "name": "TrendWear Clothing Store",
+    "url": "https://YOUR-SITE.netlify.app/",
+    "email": "info@trendwear.co.za",
+    "telephone": "+27 800 123 45658",
+    "areaServed": "ZA",
+    "description": "Affordable family fashion in South Africa."
+  }
+  </script>
+
   <link rel="stylesheet" href="css/style.css">
   <script src="js/script.js" defer></script>
 </head>
@@ -30,9 +53,10 @@
         <p>Shop women's clothing, men's clothing, kids' clothing, footwear, accessories, school uniforms and baby wear.</p>
         <a class="button-link" href="content/products.html">Explore our products</a>
       </div>
-      <img src="images/Logos/Logo Image.png.png" alt="TrendWear Clothing Store logo" width="350" height="350" loading="lazy">
+      <!-- Hero image is above the fold, so it is NOT lazy-loaded -->
+      <img src="images/Logos/Logo Image.png.png" alt="TrendWear Clothing Store logo" width="350" height="350">
     </section>
-    <section>
+    <section class="reveal">
       <h2>Shop by category</h2>
       <div class="category-grid">
         <article><h3>Women's Clothing</h3><p>Everyday styles for different occasions.</p></article>
@@ -42,8 +66,9 @@
         <article><h3>School Uniforms</h3><p>Prepare for the school year.</p></article>
         <article><h3>Baby Wear</h3><p>Comfortable clothing for little ones.</p></article>
       </div>
+      <p><a href="content/products.html">See the full product range</a></p>
     </section>
-    <section>
+    <section class="reveal">
       <h2>Why shop at TrendWear?</h2>
       <ul>
         <li>Affordable clothing for the family</li>
@@ -51,7 +76,8 @@
         <li>Convenient online browsing</li>
         <li>Delivery and click-and-collect options</li>
       </ul>
-      <p>Have a question? <a href="content/contact.html">Contact our customer support team</a>.</p>
+      <p>Have a question? <a href="content/enquiry.html">Send a product enquiry</a> or
+        <a href="content/contact.html">contact our customer support team</a>.</p>
     </section>
   </main>
   <footer><p>&copy; 2026 TrendWear Clothing Store. All rights reserved.</p></footer>
