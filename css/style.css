@@ -493,3 +493,26 @@ button.button-link { border: 0; cursor: pointer; font: inherit; font-weight: 700
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
   .js .reveal { opacity: 1; transform: none; }
 }
+
+/* Red validation messages shown under each form field (enquiry + contact) */
+.field-error {
+  display: block;
+  margin: 0.35rem 0 0;
+  padding: 0.25rem 0.5rem;
+  background: #ffffff;
+  color: #c00000;
+  border-left: 4px solid #c00000;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.field-error[hidden] { display: none; }
+form [aria-invalid="true"]:not([type="radio"]) {
+  border-color: #c00000 !important;
+  box-shadow: 0 0 0 3px rgba(192, 0, 0, 0.25) !important;
+}
+
+/* Search / Clear buttons and clickable home-page logo */
+.catalogue-tools .search-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.catalogue-tools .search-actions .button-link { margin: 0; }
+.hero img { cursor: zoom-in; }

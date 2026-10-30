@@ -59,6 +59,11 @@
                     <option value="name">Name: A to Z</option>
                 </select>
             </div>
+
+            <div class="search-actions">
+                <button type="button" id="searchButton" class="button-link">Search</button>
+                <button type="button" id="clearSearch" class="button-link">Clear</button>
+            </div>
         </div>
 
         <p>Select an image to see it larger, then <a href="enquiry.html">send an enquiry</a>
@@ -67,7 +72,7 @@
         <!-- Product cards are enhanced by script.js (search, filter, sort) -->
         <div id="productGrid" class="product-grid">
             <!-- Pictures are written in the HTML so they always show; script.js then adds search, filter and sort -->
-            <article class="product-card">
+            <article class="product-card" data-id="1">
                 <button type="button" class="image-button" aria-label="View larger image of Women&#x27;s Everyday Outfit 1">
                     <img class="gallery-image" src="../images/Womens%20clothes/Women%20clothes.png.png" alt="Women&#x27;s everyday outfit from the TrendWear collection, style 1" width="300" height="300" loading="lazy">
                 </button>
@@ -77,7 +82,7 @@
                 <p class="product-details">Sizes: S, M, L, XL | Colours: Black, Navy, Cream | In stock</p>
                 <a class="button-link" href="enquiry.html?product=Women%27s%20Everyday%20Outfit%201">Enquire about Women&#x27;s Everyday Outfit 1</a>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-id="2">
                 <button type="button" class="image-button" aria-label="View larger image of Women&#x27;s Everyday Outfit 2">
                     <img class="gallery-image" src="../images/Womens%20clothes/Women%20clothes1.png.png" alt="Women&#x27;s everyday outfit from the TrendWear collection, style 2" width="300" height="300" loading="lazy">
                 </button>
@@ -87,7 +92,7 @@
                 <p class="product-details">Sizes: S, M, L, XL | Colours: Burgundy, Grey, White | In stock</p>
                 <a class="button-link" href="enquiry.html?product=Women%27s%20Everyday%20Outfit%202">Enquire about Women&#x27;s Everyday Outfit 2</a>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-id="3">
                 <button type="button" class="image-button" aria-label="View larger image of Men&#x27;s Casual Outfit">
                     <img class="gallery-image" src="../images/Mens%20clothes/Mens%20clothes.png.png" alt="Men&#x27;s casual outfit from the TrendWear collection" width="300" height="300" loading="lazy">
                 </button>
@@ -97,7 +102,7 @@
                 <p class="product-details">Sizes: S, M, L, XL | Colours: Khaki, Navy, Black | In stock</p>
                 <a class="button-link" href="enquiry.html?product=Men%27s%20Casual%20Outfit">Enquire about Men&#x27;s Casual Outfit</a>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-id="4">
                 <button type="button" class="image-button" aria-label="View larger image of Men&#x27;s Smart Outfit">
                     <img class="gallery-image" src="../images/Mens%20clothes/Mens%20clothes2.png.png" alt="Men&#x27;s smart outfit from the TrendWear collection" width="300" height="300" loading="lazy">
                 </button>
@@ -107,7 +112,7 @@
                 <p class="product-details">Sizes: S, M, L, XL | Colours: Charcoal, Navy | In stock</p>
                 <a class="button-link" href="enquiry.html?product=Men%27s%20Smart%20Outfit">Enquire about Men&#x27;s Smart Outfit</a>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-id="5">
                 <button type="button" class="image-button" aria-label="View larger image of Everyday Shoes 1">
                     <img class="gallery-image" src="../images/Shoes/Shoes.png.png" alt="Pair of everyday shoes from the TrendWear footwear range" width="300" height="300" loading="lazy">
                 </button>
@@ -117,7 +122,7 @@
                 <p class="product-details">Sizes: 3, 4, 5, 6, 7, 8, 9, 10 | Colours: Black, Brown | In stock</p>
                 <a class="button-link" href="enquiry.html?product=Everyday%20Shoes%201">Enquire about Everyday Shoes 1</a>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-id="6">
                 <button type="button" class="image-button" aria-label="View larger image of Everyday Shoes 2">
                     <img class="gallery-image" src="../images/Shoes/Shoes1.png.png" alt="Second style of everyday shoes from the TrendWear footwear range" width="300" height="300" loading="lazy">
                 </button>
@@ -127,7 +132,7 @@
                 <p class="product-details">Sizes: 3, 4, 5, 6, 7, 8, 9, 10 | Colours: White, Grey | In stock</p>
                 <a class="button-link" href="enquiry.html?product=Everyday%20Shoes%202">Enquire about Everyday Shoes 2</a>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-id="7">
                 <button type="button" class="image-button" aria-label="View larger image of Everyday Accessories 1">
                     <img class="gallery-image" src="../images/Accessories/Accessories.png.png" alt="Accessories that complement an everyday outfit, style 1" width="300" height="300" loading="lazy">
                 </button>
@@ -137,7 +142,7 @@
                 <p class="product-details">Sizes: One size | Colours: Black, Brown, Gold | In stock</p>
                 <a class="button-link" href="enquiry.html?product=Everyday%20Accessories%201">Enquire about Everyday Accessories 1</a>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-id="8">
                 <button type="button" class="image-button" aria-label="View larger image of Everyday Accessories 2">
                     <img class="gallery-image" src="../images/Accessories/Accessories1.png.png" alt="Accessories that complement an everyday outfit, style 2" width="300" height="300" loading="lazy">
                 </button>
@@ -147,7 +152,7 @@
                 <p class="product-details">Sizes: One size | Colours: Silver, Gold | In stock</p>
                 <a class="button-link" href="enquiry.html?product=Everyday%20Accessories%202">Enquire about Everyday Accessories 2</a>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-id="9">
                 <button type="button" class="image-button" aria-label="View larger image of School Uniform Set">
                     <img class="gallery-image" src="../images/School%20Uniform/School%20Uniform.png.png" alt="School uniform set from TrendWear" width="300" height="300" loading="lazy">
                 </button>
@@ -157,7 +162,7 @@
                 <p class="product-details">Sizes: 6-7, 8-9, 10-11, 12-13 | Colours: Grey, White, Navy | In stock</p>
                 <a class="button-link" href="enquiry.html?product=School%20Uniform%20Set">Enquire about School Uniform Set</a>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-id="10">
                 <button type="button" class="image-button" aria-label="View larger image of Baby Wear Set 1">
                     <img class="gallery-image" src="../images/Kids%20clothes/Kids%20clothes.png.png" alt="Baby clothing set from the TrendWear baby-wear range, style 1" width="300" height="300" loading="lazy">
                 </button>
@@ -167,7 +172,7 @@
                 <p class="product-details">Sizes: 0-3 months, 3-6 months, 6-12 months | Colours: Yellow, White, Blue | In stock</p>
                 <a class="button-link" href="enquiry.html?product=Baby%20Wear%20Set%201">Enquire about Baby Wear Set 1</a>
             </article>
-            <article class="product-card">
+            <article class="product-card" data-id="11">
                 <button type="button" class="image-button" aria-label="View larger image of Baby Wear Set 2">
                     <img class="gallery-image" src="../images/Kids%20clothes/Kids%20clothes1.png.png" alt="Baby clothing set from the TrendWear baby-wear range, style 2" width="300" height="300" loading="lazy">
                 </button>

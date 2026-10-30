@@ -1,18 +1,4 @@
-/*
- * TrendWear Part 3 JavaScript
- * Features:
- * - Product data (edit PRODUCTS below) rendered with DOM building
- * - Product search, category filter and sorting
- * - Accessible image lightbox (<dialog>)
- * - Accordion (FAQ) and scroll-reveal animation
- * - Interactive Leaflet store map with "find my nearest store"
- * - Client-side validation + AJAX submission for the enquiry/contact forms
- *
- * IMPORTANT:
- * FormSubmit is an external form relay. The recipient must verify the
- * email address, and the service must be tested after deployment.
- * Do not put passwords, API secrets, or private keys in front-end code.
- */
+
 "use strict";
 
 // Lets the CSS hide .reveal elements only when JavaScript is actually running.
@@ -53,13 +39,15 @@ document.addEventListener("DOMContentLoaded", () => {
   initForms();
 });
 
-/* ---------- PRODUCTS: dynamic loading, search, filter, sort ---------- */
+/* ---------- PRODUCTS: search, filter, sort ---------- */
 
-async function initProducts() {
+function initProducts() {
   const grid = document.querySelector("#productGrid");
   const searchInput = document.querySelector("#productSearch");
   const categoryFilter = document.querySelector("#categoryFilter");
   const sortSelect = document.querySelector("#productSort");
+  const searchButton = document.querySelector("#searchButton");
+  const clearButton = document.querySelector("#clearSearch");
   const productCount = document.querySelector("#productCount");
   const noProducts = document.querySelector("#noProducts");
   if (!grid || !searchInput || !categoryFilter || !sortSelect) return;
@@ -67,32 +55,46 @@ async function initProducts() {
   const products = PRODUCTS;
 
   // Build the category dropdown from the data itself.
-  [...new Set(products.map((p) => p.category))].sort().forEach((category) => {
-    const option = document.createElement("option");
-    option.value = category;
-    option.textContent = category;
-    categoryFilter.append(option);
-  });
+  if (categoryFilter.options.length <= 1) {
+    [...new Set(products.map((p) => p.category))].sort().forEach((category) => {
+      const option = document.createElement("option");
+      option.value = category;
+      option.textContent = category;
+      categoryFilter.append(option);
+    });
+  }
 
+  // Use the cards already written in the HTML (so pictures always show);
+  // build any card that is missing from the page.
+  const existing = new Map(
+    [...grid.querySelectorAll(".product-card[data-id]")].map((card) => [Number(card.dataset.id), card])
+  );
   const entries = products.map((product, index) => ({
     product,
     index,
-    element: buildProductCard(product)
+    element: existing.get(product.id) || buildProductCard(product)
   }));
+  grid.replaceChildren(...entries.map((entry) => entry.element));
 
+  // Show/hide and re-order the cards. Returns how many are visible.
   function update() {
-    const term = searchInput.value.trim().toLowerCase();
+    const terms = searchInput.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
     const category = categoryFilter.value;
+    let visibleCount = 0;
 
-    const visible = entries.filter(({ product }) => {
+    entries.forEach(({ product, element }) => {
       const text = [
         product.name, product.category, product.description,
         (product.colours || []).join(" "), (product.sizes || []).join(" ")
       ].join(" ").toLowerCase();
-      return text.includes(term) && (category === "all" || product.category === category);
+      const matches =
+        terms.every((term) => text.includes(term)) &&
+        (category === "all" || product.category === category);
+      element.hidden = !matches;
+      if (matches) visibleCount += 1;
     });
 
-    visible.sort((a, b) => {
+    const sorted = [...entries].sort((a, b) => {
       switch (sortSelect.value) {
         case "price-asc": return a.product.price - b.product.price;
         case "price-desc": return b.product.price - a.product.price;
@@ -100,23 +102,52 @@ async function initProducts() {
         default: return a.index - b.index;
       }
     });
+    grid.append(...sorted.map((entry) => entry.element));
 
-    grid.replaceChildren(...visible.map((entry) => entry.element));
     if (productCount) {
-      productCount.textContent = `Showing ${visible.length} of ${products.length} products.`;
+      productCount.textContent = visibleCount === 0
+        ? "No products found."
+        : `Showing ${visibleCount} of ${products.length} products.`;
     }
-    if (noProducts) noProducts.hidden = visible.length !== 0;
+    if (noProducts) noProducts.hidden = visibleCount !== 0;
+    return visibleCount;
+  }
+
+  // Pressing Enter or clicking Search shows the results and scrolls to them.
+  function runSearch() {
+    const visible = update();
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const target = visible > 0 ? grid : noProducts;
+    if (target) target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
   }
 
   searchInput.addEventListener("input", update);
+  searchInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      runSearch();
+    }
+  });
   categoryFilter.addEventListener("change", update);
   sortSelect.addEventListener("change", update);
+  if (searchButton) searchButton.addEventListener("click", runSearch);
+  if (clearButton) {
+    clearButton.addEventListener("click", () => {
+      searchInput.value = "";
+      categoryFilter.value = "all";
+      sortSelect.value = "default";
+      update();
+      searchInput.focus();
+    });
+  }
+
   update();
 }
 
 function buildProductCard(product) {
   const card = document.createElement("article");
   card.className = "product-card";
+  card.dataset.id = product.id;
 
   const imageButton = document.createElement("button");
   imageButton.type = "button";
@@ -168,29 +199,56 @@ function buildProductCard(product) {
   return card;
 }
 
-/* ---------- LIGHTBOX (works for dynamically added images) ---------- */
+/* ---------- LIGHTBOX (works on every page and for dynamically added images) ---------- */
 
 function initLightbox() {
-  const lightbox = document.querySelector("#lightbox");
-  const lightboxImage = document.querySelector("#lightboxImage");
-  const lightboxCaption = document.querySelector("#lightboxCaption");
-  const closeLightbox = document.querySelector("#closeLightbox");
-  if (!lightbox || !lightboxImage) return;
+  // If a page has no lightbox in its HTML, create one so pictures can open anywhere.
+  let lightbox = document.querySelector("#lightbox");
+  if (!lightbox) {
+    lightbox = document.createElement("dialog");
+    lightbox.id = "lightbox";
+    lightbox.className = "lightbox";
+    lightbox.setAttribute("aria-label", "Enlarged image");
+    lightbox.innerHTML =
+      '<button type="button" id="closeLightbox" class="lightbox-close">Close</button>' +
+      '<img id="lightboxImage" src="" alt=""><p id="lightboxCaption"></p>';
+    document.body.append(lightbox);
+  }
+  const lightboxImage = lightbox.querySelector("#lightboxImage");
+  const lightboxCaption = lightbox.querySelector("#lightboxCaption");
+  const closeLightbox = lightbox.querySelector("#closeLightbox");
 
-  document.addEventListener("click", (event) => {
-    const trigger = event.target.closest(".image-button");
-    if (!trigger) return;
-    const image = trigger.querySelector("img");
-    if (!image) return;
+  const STANDALONE = ".hero img, img[data-lightbox]";
 
-    lightboxImage.src = image.src;
+  // Pictures that are not inside a button still need to work with the keyboard.
+  document.querySelectorAll(STANDALONE).forEach((img) => {
+    if (img.closest(".image-button")) return;
+    img.tabIndex = 0;
+    img.setAttribute("role", "button");
+    img.setAttribute("aria-label", `View larger image: ${img.alt}`);
+  });
+
+  function openLightbox(image) {
+    lightboxImage.src = image.currentSrc || image.src;
     lightboxImage.alt = image.alt;
-    if (lightboxCaption) {
-      const heading = trigger.closest(".product-card")?.querySelector("h2");
-      lightboxCaption.textContent = heading ? heading.textContent : image.alt;
-    }
+    const heading = image.closest(".product-card")?.querySelector("h2");
+    lightboxCaption.textContent = heading ? heading.textContent : image.alt;
     if (typeof lightbox.showModal === "function") lightbox.showModal();
     else window.open(image.src, "_blank", "noopener");
+  }
+
+  document.addEventListener("click", (event) => {
+    const image =
+      event.target.closest(".image-button")?.querySelector("img") ||
+      event.target.closest(STANDALONE);
+    if (image) openLightbox(image);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if ((event.key === "Enter" || event.key === " ") && event.target.matches?.(STANDALONE)) {
+      event.preventDefault();
+      openLightbox(event.target);
+    }
   });
 
   if (closeLightbox) closeLightbox.addEventListener("click", () => lightbox.close());
